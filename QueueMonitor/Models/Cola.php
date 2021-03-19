@@ -19,5 +19,9 @@ class Cola{
 			return $datos = array("error" => "error");
 		}
 	}
+	
+	public function __destruct(){
+		$this->mc->quit();
+	}
 }
 ?>
