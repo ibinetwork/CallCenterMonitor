@@ -60,13 +60,11 @@ foreach($total_agentes as $agente) {
 	if(array_key_exists('callerid', $agente) && $agente['estado'] == "Conectado"){
 	//print_r($agente);
 ?>
-			<div class="col-md-2" align="center">
-				<!--div align="center" class="alert alert-<?php echo $tipo_etiqueta[$agente['estado']];?>"-->
-					<span class="badge badge-<?php echo $tipo_etiqueta[$agente['estado']];?>"><?php echo str_replace("@from-queue","",$agente['canal']);?> <?php echo $agente['estado'];?>					
-					<br>Num: <?php echo str_replace("@from-queue","",$agente['callerid']);?>
-					<br>Tiempo: <?php echo $agente['duracion'];?>									
-					</span>
-				<!--/div-->
+			<div class="col-md-2" align="center">				
+				<span class="badge badge-<?php echo $tipo_etiqueta[$agente['estado']];?>"><?php echo str_replace("@from-queue","",$agente['canal']);?> <?php echo $agente['estado'];?>					
+				<br>Num: <?php echo $agente['callerid'];?>
+				<br>Tiempo: <?php echo $agente['duracion'];?>									
+				</span>				
 			</div>
 <?php
 }

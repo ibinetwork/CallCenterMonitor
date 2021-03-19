@@ -31,27 +31,25 @@ https://github.com/neovoice/CallCenterMonitor/blob/master/LICENSE -->
 		</table>	
 	</div>
 	<div class="container">		
-			<h5>Estado de los operadores:&nbsp;<span class="badge badge-success">Libre</span>&nbsp;<span class="badge badge-primary">En llamada</span>&nbsp;<span class="badge badge-secondary">Ocupado</span>&nbsp;<span class="badge badge-danger">Pausado</span>&nbsp;<span class="badge badge-info">No conectado</span></h5>
+			<h5>Estado de los operadores:&nbsp;<span class="badge badge-success">Libre</span>&nbsp;<span class="badge badge-primary">En llamada</span>&nbsp;<span class="badge badge-secondary">Ocupado</span>&nbsp;<span class="badge badge-warning">Timbrando</span>&nbsp;<span class="badge badge-danger">Pausado</span>&nbsp;<span class="badge badge-info">Desconectado</span></h5>
 		<div class="row">
 <?php
 $tipo_etiqueta = array("Pausado" => "danger", "Ocupado" => "secondary", "Conectado" => "primary", "Offline" => "info", "Libre" => "success", "Timbrando" => "warning");
 foreach($datos['agentes'] as $agente) {
 	//print_r($agente);
 ?>
-			<div class="col-md-2" align="center">
-				<!--div align="center" class="alert alert-<?php echo $tipo_etiqueta[$agente['estado']];?>"-->
-					<span class="badge badge-<?php echo $tipo_etiqueta[$agente['estado']];?>"><?php echo str_replace("@from-queue","", $agente['canal']);?>
-					<br><?php echo str_replace("@from-queue","",$agente['nombre']);?>
+			<div class="col-md-2" align="center">				
+				<span class="badge badge-<?php echo $tipo_etiqueta[$agente['estado']];?>"><?php echo str_replace("@from-queue","", $agente['canal']);?>
+				<br><?php echo str_replace("@from-queue","",$agente['nombre']);?>
 <?php
 	if(array_key_exists('callerid', $agente)){
 ?>					
-					<br>Num: <?php echo $agente['callerid'];?>
-					<br>Tiempo: <?php echo $agente['duracion'];?>
+				<br>Num: <?php echo $agente['callerid'];?>
+				<br>Tiempo: <?php echo $agente['duracion'];?>
 <?php					
 }					
 ?>					
-				</span>
-				<!--/div-->
+				</span>				
 			</div>
 <?php
 }
