@@ -38,8 +38,6 @@ function existNewDataInTableStatesGeneral(last_response_general_json, response_j
 
 function existNewDataInTableStatesSpecific(last_response_specific_json, response_json){
 
-    // console.log(last_response_specific_json)
-    // console.log(response_json)
     if(Object.keys(last_response_specific_json).length != Object.keys(response_json).length){
         return true;
     }
@@ -69,8 +67,6 @@ function getQueueStates(){
             try {
                 response_json = JSON.parse(html.match(re)[0].replace("<JSON_DATA>", "").replace("</JSON_DATA>", ""))
                 
-                // console.log(response_json)
-
                 if(existNewDataInTableStatesGeneral(last_response_general_json, response_json)){
                     resetTable("table-queue-state");
                     fillTableStates(response_json, false)
@@ -84,18 +80,16 @@ function getQueueStates(){
                 var agents = [];
 
                 for (const [key, element] of Object.entries(response_json)){
-                    // console.log(element['agentes'])
+                    
                     if(element['agentes'] != undefined){
-                        // console.log(element['agentes'].length)
+                        
                         if(element['agentes'].length > 0){
                             agents = agents.concat(element['agentes'])
                         }
                     }
                 }
 
-                if(agents.length > 0)
-                {
-                    // console.log(agents)
+                if(agents.length > 0){
                     fillAgentsState(agents, false)
                 }
 
@@ -103,7 +97,6 @@ function getQueueStates(){
 
                 for (const [key, element] of Object.entries(response_json)){
 
-                    // console.log(element['llamadas'])
 
                     if(element['llamadas'] != undefined){
                         if(element['llamadas'].length > 0){
@@ -114,7 +107,7 @@ function getQueueStates(){
 
                 if(calls.length > 0)
                 {
-                    // console.log(calls)
+                    
                     fillEntryCalls(calls)
                 }
 
@@ -153,16 +146,13 @@ function getSpecificQueueState(queue_val){
         success:function(html) {
             // filter to evade HTML rubish. This is a app custom protocol.
 
-            
 
             try {
                 response_json = JSON.parse(html.match(re)[0].replace("<JSON_DATA>", "").replace("</JSON_DATA>", ""))
                 if(response_json == null){
-                    alert("no se encontraron datos de ese id")
+                    console.log("no se encontraron datos de ese id")
                     return;
                 }
-
-                // console.log(response_json)
 
                 if(existNewDataInTableStatesSpecific(last_response_specific_json, response_json)){
                     resetTable("table-queue-state");
@@ -178,7 +168,6 @@ function getSpecificQueueState(queue_val){
 
                     var agents = response_json['agentes'];
 
-                    // console.log(agents)
                     fillAgentsState(agents, true)
                 }
 
@@ -187,7 +176,6 @@ function getSpecificQueueState(queue_val){
                 if(response_json['llamadas'].length > 0){
 
                     var calls = response_json['llamadas'];
-                    // console.log(calls)
                     fillEntryCalls(calls);
                 }
 
@@ -292,37 +280,5 @@ function resetTable(table_id){
 
 function resetElement(element_id){
     $('#' + element_id).empty();
-}
-
-
-function testPut(){
-    getQueueStates();
-}
-
-function testClean(){
-    resetTable("table-queue-state");
-    resetTable("table-entry-calls");
-    resetElement("operators_in_call")
-}
-
-function testRefresh(){
-    testClean()
-    testPut()
-}
-
-
-function testSpecificPut(){
-    getSpecificQueueState();
-}
-
-function testSpecificClean(){
-    resetTable("table-queue-state");
-    resetTable("table-entry-calls");
-    resetElement("operators_in_call")
-}
-
-function testSpecificRefresh(){
-    testClean()
-    testPut()
 }
 

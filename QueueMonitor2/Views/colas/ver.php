@@ -28,11 +28,6 @@ $(function (ready){
 
 </script>
 
-<!--
-<button onclick="testSpecificPut()">Put</button>
-<button onclick="testSpecificClean()">Clean</button>
-<button onclick="testSpecificRefresh()">Refresh</button>
--->
 
 <div class="container-call-info">
   <div class="container-left">

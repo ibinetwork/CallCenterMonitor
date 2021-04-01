@@ -28,21 +28,10 @@ class colasController{
 
 	public function ver($id){
 		$this->actual_id = $id;
-
-		//echo "<hr>Método VER: ARG: $id<br>";
 		return $id;
-		/*
-		$infocola = $this->colas->mcread('infocolas');
-		if(array_key_exists('error',$infocola)){
-			return $infocola;
-		}else{
-			$cola = $infocola[$id];		
-			return $cola;
-		}*/
 	}
 	
 	public function listacolas(){
-		//echo "<hr>Método listacolas<br>";
 		$infocola = $this->colas->mcread('infocolas');
 		$this->lista = array_keys($infocola);			
 		asort($this->lista);
@@ -51,7 +40,6 @@ class colasController{
 	}
 
 	public function getQueues(){
-		//echo "<hr>Método listacolas<br>";
 		$infocola = $this->colas->mcread('infocolas');
 		$this->lista = array_keys($infocola);			
 		asort($this->lista);
@@ -60,22 +48,11 @@ class colasController{
 	}
 
 	public function get_queues_states(){
-		//echo "<br>GETSTATES NORMAL<bR>";
 
 		if(isset($_POST)){
-			//echo "<br>GET STATES POST<br>";
 
 			$info = $_POST["info"];
-
-			/*
-
 			$infocola = $this->colas->mcread('infocolas');
-			$infocola = $this->colas->mcreadTest();
-			*/
-
-			$infocola = $this->colas->mcread('infocolas');
-			
-
 			ksort($infocola);
 
 			echo "<JSON_DATA>" . json_encode($infocola) . "</JSON_DATA>";
@@ -84,23 +61,14 @@ class colasController{
 	}
 
 	public function get_queue_state(){
-		//echo "<br>GETSTATES NORMAL<bR>";
 
 		if(isset($_POST)){
-			//echo "<br>GET STATE POST<br>";
 
 			$info = $_POST["info"];
 			$queue = $_POST["queue"];
 
-			/*
+			$infocola = $this->colas->mcread($info);
 
-			$infocola = $this->colas->mcread('infocolas');
-			$infocola = $this->colas->mcreadTest();
-			*/
-
-			$infocola = $this->colas->mcread('infocolas');
-
-			
 			echo "<JSON_DATA>" . json_encode($infocola[$queue]) . "</JSON_DATA>";
 
 		}

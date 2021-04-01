@@ -25,13 +25,6 @@ $(function (ready){
 
 </script>
 
-
-<!--
-<button onclick="testPut()">Put</button>
-<button onclick="testClean()">Clean</button>
-<button onclick="testRefresh()">Refresh</button>
--->
-
 <div class="container-call-info">
   <div class="container-left">
     <div class="call-state">
