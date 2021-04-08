@@ -1,7 +1,7 @@
 <?php namespace Models;
-//Este código está bajo la licencia MIT, puedes revisar la licencia el el fichero LICENSE en la raiz del proyecto o en:
-//https://github.com/neovoice/CallCenterMonitor/blob/master/LICENSE
-Use Memcached;
+//Este código está bajo la licencia MIT, puedes revisar la licencia el el fichero LICENSE en la raiz del proyecto o en => 
+//https => //github.com/neovoice/CallCenterMonitor/blob/master/LICENSE
+use Memcached;
 
 class Cola{
 	private $mc;
@@ -12,13 +12,22 @@ class Cola{
 	}
 	//leer infocolas o infocanales
 	public function mcread($info){
-		$datos = ( $this->mc->get($info) ) ? $this->mc->get($info) : array();
+		$datos = ( $this->mc->get($info) ) ? $this->mc->get($info):  array();
 		if(!empty($datos)){
 			return $datos;
 		}else{
 			return $datos = array("error" => "error");
 		}
 	}
+
+	public function mcreadTest(){
+		// this function is being read two times
+		return [];		
+
+	}
+
+
+	
 	
 	public function __destruct(){
 		$this->mc->quit();

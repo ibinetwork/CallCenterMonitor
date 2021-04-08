@@ -7,11 +7,11 @@ class Autoload{
       $ruta = str_replace("\\","/",$class).".php";
       if(file_exists($ruta)){
         include_once $ruta;
-        //echo "La ruta es: $ruta";
+        // echo "<br>La ruta cargada es: $ruta<br>";
       }
-      //else{
-      //   echo "El archivo de clase: $ruta no existe";
-      // }
+      else{
+         echo "<br> No se pudo cargar: $ruta, no existe<br>";
+      }
     });
   }
 }

@@ -9,9 +9,12 @@ class Request{
   public function __construct(){	  
     if(isset($_GET['url'])){
       $ruta = filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL);
-      $ruta = explode("/", $ruta);
+      $ruta = explode("/", $ruta); // each part is transformed in a element of array
       $ruta = array_filter($ruta);
-      //print_r($ruta);
+      
+      // echo "<br>REQUEST (arriba): " . var_dump($ruta) . "<br>";
+
+
       if($ruta[0] == "index.php"){
         $this->controlador = "colas";
       }else{
@@ -27,10 +30,11 @@ class Request{
       //echo $this->controlador ."-". $this->metodo ."-". $this->argumento;
      }
      $this->argumento = $ruta;
-  }else{
-    $this->controlador = "colas";
-    $this->metodo = "index";
-  }
+    }else{
+      // si no hay ninguna ruta extra a la por defecto se usa el método index de colas
+      $this->controlador = "colas";
+      $this->metodo = "index";
+    }
 }
 
   public function getControlador(){

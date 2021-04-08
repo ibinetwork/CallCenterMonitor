@@ -1,5 +1,16 @@
 {
+    "autoload": {
+        "psr-4": {
+            "React\\Socket\\": "QueueMonitorSockets\\utils\\socket_src"
+        }
+    },
     "require": {
-        "welltime/phpagi": "^2.20"
+        "welltime/phpagi": "^2.20",
+        "evenement/evenement": "^3.0 || ^2.0 || ^1.0",
+        "react/dns": "^1.1",
+        "react/event-loop": "^1.0 || ^0.5",
+        "react/promise": "^2.6.0 || ^1.2.1",
+        "react/promise-timer": "^1.4.0",
+        "react/stream": "^1.1"
     }
 }

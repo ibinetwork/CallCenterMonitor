@@ -5,38 +5,50 @@ use Models\Cola as Cola;
 
 class colasController{
 	private $colas;
-	private $canales;
 	private $lista;
+
+	private $actual_id;
+
+	private $queue = 5001;
 	
 	public function __construct(){
 		$this->colas = new Cola();
-		$this->canales = new Cola();
+		$this->actual_id = 5003;
+	}
+
+	public function getActualIdView(){
+		return $this->actual_id;
 	}
 
 	public function index(){
+		//echo "<hr>Método INDEX<br>";
 		$infocola = $this->colas->mcread('infocolas');
+		// echo "<br><pre>" . var_export($infocola) . "</pre><br>";
 		ksort($infocola);
 		return $infocola;
 	}
 
-	public function ver(){
-		$uri = explode("/",  $_SERVER['REQUEST_URI']);
-		$id = end($uri);
-		$infocola = $this->colas->mcread('infocolas');
-		if(array_key_exists('error',$infocola)){
-			return $infocola;
-		}else{
-			$cola = $infocola[$id];		
-			return $cola;
-		}
+	public function ver($id){
+		$this->actual_id = $id;
+		return $id;
 	}
 	
 	public function listacolas(){
 		$infocola = $this->colas->mcread('infocolas');
 		$this->lista = array_keys($infocola);			
 		asort($this->lista);
+		
 		return $this->lista;
-	}	
+	}
+
+	public function getQueues(){
+		$infocola = $this->colas->mcread('infocolas');
+		$this->lista = array_keys($infocola);			
+		asort($this->lista);
+		
+		return $this->lista;
+	}
+
 }
 
 ?>
