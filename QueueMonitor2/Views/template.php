@@ -22,12 +22,15 @@ class Template{
         <link rel="stylesheet" href="<?php echo URL; ?>Views/template/css/bootstrap.min.css" media="screen">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <script src="<?php echo URL; ?>Views/template/js/jquery.min.js"></script>
-        <script src="<?php echo URL; ?>Views/template/js/bootstrap.min.js"></script>
+        <script src="<?php echo URL; ?>Views/template/js/third_libs/jquery.min.js"></script>
+        <script src="<?php echo URL; ?>Views/template/js/third_libs/bootstrap.min.js"></script>
+        <script src="<?php echo URL; ?>Views/template/js/third_libs/chartjs.js"></script>
         <script>
         const ref_url = "<?php echo URL; ?>";
         </script>
-        <script src="<?php echo URL; ?>Views/template/js/monitor.js"></script>         
+        
+        <script src="<?php echo URL; ?>Views/template/js/chart.js"></script> 
+        <script src="<?php echo URL; ?>Views/template/js/utils.js"></script>         
 
     </head>
     <body>

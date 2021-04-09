@@ -63,6 +63,9 @@ class StreamEncryption
 
         // get actual stream socket from stream instance
         $socket = $stream->stream;
+        echo "\n stream: " . $stream->stream . ", encrypt: " . $stream->encryptionEnabled;
+        var_dump($this->server);
+        var_dump($socket);
 
         // get crypto method from context options or use global setting from constructor
         $method = $this->method;
@@ -70,8 +73,8 @@ class StreamEncryption
         if (isset($context['ssl']['crypto_method'])) {
             $method = $context['ssl']['crypto_method'];
         }
-        echo "\nCONTEXT: $method\n";
-        echo var_export($context);
+        
+        // echo var_export($context);
         
 
         $that = $this;
@@ -80,16 +83,18 @@ class StreamEncryption
         };
 
 
-        echo "\nthat: \n";
-        echo var_export($that);
 
         $this->loop->addReadStream($socket, $toggleCrypto);
 
         if (!$this->server) {
             $toggleCrypto();
+            echo "\nToggle Crypto";
         }
 
+
         $loop = $this->loop;
+
+
 
         return $deferred->promise()->then(function () use ($stream, $socket, $loop, $toggle) {
             $loop->removeReadStream($socket);
@@ -101,10 +106,8 @@ class StreamEncryption
         }, function($error) use ($stream, $socket, $loop) {
             $loop->removeReadStream($socket);
             $stream->resume();
-            echo "\nstream: \n";
-            echo var_export($stream);
-            echo "\nsocket: \n";
-            echo var_export($socket);
+            // echo "\nstream: \n";
+            // echo var_export($stream);
             throw $error;
         });
     }

@@ -2,7 +2,10 @@
 https://github.com/neovoice/CallCenterMonitor/blob/master/LICENSE -->
 
 <link rel="stylesheet" href="<?php echo URL; ?>Views/template/css/styles-colas.css" media="screen">
-        
+
+<script src="<?php echo URL; ?>Views/template/js/queues/tables.js"></script> 
+<script src="<?php echo URL; ?>Views/template/js/queues/main.js"></script> 
+
 <script>
 
 $(function (ready){
@@ -36,8 +39,8 @@ $(function (ready){
             <th>Agentes</th>
             <th>Atendiendo</th>
             <th>En Cola</th>
-            <th>Completadas</th>
-            <th>Abandonadas</th>		
+            <th>Tiempo promedio de duración</th>	
+            <th>Tiempo promedio de espera</th>	
             <th>SL</th>
           </tr>
         </thead>
@@ -52,22 +55,31 @@ $(function (ready){
         
       </div>
     </div>
+    <div class="chart-container">
+      <h2 style="text-align: center;">Total de llamadas completadas vs abandonadas</h2>
+      <canvas id="chartPie"></canvas>
+    </div>
+
+
+
   </div>
   <div class="container-right">
-	<div class="entry-calls">
-		<h5>Llamadas entrantes</h5>
-		<table class="table table-hover table-sm col-xs-1 text-center" id="table-entry-calls">
-		<thead>
-			<tr class="table-active col-xs-1 text-center">
-			<th>Número</th>
-			<th>Canal</th>
-			<th>Tiempo</th>
-			</tr>
-		</thead>
-		<tbody>
+    <div class="entry-calls">
+      <h5>Llamadas entrantes</h5>
+      <table class="table table-hover table-sm col-xs-1 text-center" id="table-entry-calls">
+      <thead>
+        <tr class="table-active col-xs-1 text-center">
+        <th>Número</th>
+        <th>Canal</th>
+        <th>Tiempo</th>
+        </tr>
+      </thead>
+      <tbody>
 
-		</tbody>
-		</table>
-	</div>
+      </tbody>
+      </table>
+    </div>
   </div>
 </div>
+
+

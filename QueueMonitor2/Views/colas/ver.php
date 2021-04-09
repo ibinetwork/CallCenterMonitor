@@ -7,6 +7,11 @@ var ref_id = "<?php echo $metadata; ?>";
 // console.log(ref_id)
 </script>
 
+
+<script src="<?php echo URL; ?>Views/template/js/queues/tables.js"></script> 
+<script src="<?php echo URL; ?>Views/template/js/queues/main.js"></script> 
+
+
 <script>
 
 $(function (ready){
@@ -40,8 +45,8 @@ $(function (ready){
             <th>Agentes</th>
             <th>Atendiendo</th>
             <th>En Cola</th>
-            <th>Completadas</th>
-            <th>Abandonadas</th>		
+            <th>Tiempo promedio de duración</th>	
+            <th>Tiempo promedio de espera</th>		
             <th>SL</th>
           </tr>
         </thead>
@@ -51,11 +56,16 @@ $(function (ready){
       </table>
     </div>
     <div class="agents-in-call">
-	  <h5>Estado de los operadores:&nbsp;<span class="badge badge-success">Libre</span>&nbsp;<span class="badge badge-primary">En llamada</span>&nbsp;<span class="badge badge-secondary">Ocupado</span>&nbsp;<span class="badge badge-warning">Timbrando</span>&nbsp;<span class="badge badge-danger">Pausado</span>&nbsp;<span class="badge badge-info">Desconectado</span></h5>
+	    <h5>Estado de los operadores:&nbsp;<span class="badge badge-success">Libre</span>&nbsp;<span class="badge badge-primary">En llamada</span>&nbsp;<span class="badge badge-secondary">Ocupado</span>&nbsp;<span class="badge badge-warning">Timbrando</span>&nbsp;<span class="badge badge-danger">Pausado</span>&nbsp;<span class="badge badge-info">Desconectado</span></h5>
 		
       <div class="row" id="operators_in_call">
         
       </div>
+    </div>
+    
+    <div class="chart-container">
+      <h2>Total de llamadas completadas vs abandonadas</h2>
+      <canvas id="chartPie"></canvas>
     </div>
   </div>
   <div class="container-right">

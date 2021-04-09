@@ -57,44 +57,35 @@ https://github.com/neovoice/CallCenterMonitor/blob/master/LICENSE -->
 
 <script>
 
-var websocket_server = new WebSocket("ws://<?php echo BASE_URL; ?>:<?php echo WEBSOCKET_PORT; ?>");
+var interval = setInterval(function (){
+  console.log("Conecting to web socket server...")
+}, 2000);
+
+var websocket_server = new WebSocket("wss://<?php echo BASE_URL; ?>:<?php echo WEBSOCKET_PORT; ?>");
 websocket_server.onopen = function(e) {
   
+  clearInterval(interval);
   console.log("Connected, websocket open")
+  
+    websocket_server.send("a");
+/*
+var request_update = JSON.stringify({
+        'type':'update',
+        'msg': "Open",
+        'data': []
+    });
+  var request_update = JSON.stringify({
+        'type':'update',
+        'msg': "Open",
+        'data': []
+    });
 
   
-
-  var request_update = JSON.stringify({
-          'type':'update',
-          'msg': "Open",
-          'data': []
-      });
-
-  console.log("enviando", request_update)
-  websocket_server.send(request_update);
-    
-
-
-    /*
-    websocket_server.send(
-
-        JSON.stringify({
-            'type':'socket',
-            'user_id': -1
-        })
-    );
-
-
-    clearInterval(interval);
-    interval = setInterval(function(){
-      websocket_server.send(
-            JSON.stringify({
-                'type':'update',
-                'user_id': -1
-            })
-        );
-    }, 1000);
+  interval = setInterval(function(){
+    websocket_server.send(request_update);
+  }, 1000);
     */
+
 };
 
 
@@ -102,21 +93,21 @@ websocket_server.onopen = function(e) {
 
 websocket_server.onerror = function(e) {
     // Errorhandling
-    console.log("ERROR", e)
+    console.log("ERROR: ", e)
 }
 websocket_server.onmessage = function(e)
 {
-  console.log("ONMESSAGE", e)
-  /*
-    var json = JSON.parse(e.data);
-    switch(json.type) {
-        case 'update':
-          getQueueStates(json.data)
-          break;
-        default:
-          console.log("SOCKET RECEIVED DATA: ", json)
-    }
-    */
+  // console.log("ONMESSAGE", e)
+  
+  var json = JSON.parse(e.data);
+
+  switch(json.type) {
+      case 'update':
+        getQueueStates(json.data)
+        break;
+      default:
+        console.log("SOCKET RECEIVED DATA: ", json)
+  }
 }
 
 
@@ -124,6 +115,13 @@ websocket_server.onmessage = function(e)
 $(window).on("unload", function(e) {
   clearInterval(interval)
     console.log("INTERVAL CLEARED");
+    var request_close = JSON.stringify({
+          'type':'close',
+          'msg': "Close the socket please",
+          'data': []
+      });
+
+    websocket_server.send(request_close);
   });
 
 

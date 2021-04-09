@@ -11,7 +11,7 @@ class colasController{
 	
 	public function __construct(){
 		$this->colas = new Cola();
-		$this->actual_id = 5003;
+		$this->actual_id = 5000;
 	}
 
 	public function getActualIdView(){
@@ -40,6 +40,10 @@ class colasController{
 	}
 
 	public function getQueues(){
+		/*
+		$infocola = $this->colas->mcread('infocolas');
+		$infocola = $this->colas->mcreadTest();
+		*/
 		$infocola = $this->colas->mcread('infocolas');
 		$this->lista = array_keys($infocola);			
 		asort($this->lista);
@@ -52,10 +56,24 @@ class colasController{
 		if(isset($_POST)){
 
 			$info = $_POST["info"];
-			$infocola = $this->colas->mcread('infocolas');
+			/*
+			$infocola = $this->colas->mcread($info);
+			$infocola = $this->colas->mcreadTest();
+			$global_summary = $this->colas->mcread($info)
+			*/
+			$infocola = $this->colas->mcread($info);
 			ksort($infocola);
+			$resumencolas = $this->colas->mcread("resumencolas");
+			$global_summary = $resumencolas["global_summary"];
+			$queue_detailed = $resumencolas["queue_detailed"];
 
-			echo "<JSON_DATA>" . json_encode($infocola) . "</JSON_DATA>";
+			echo "<JSON_DATA>" . json_encode(
+				array(
+					"infocolas" => $infocola,
+					"global_summary" => $global_summary,
+					"queue_detailed" => $queue_detailed
+				)
+			) . "</JSON_DATA>";
 
 		}
 	}
@@ -66,10 +84,28 @@ class colasController{
 
 			$info = $_POST["info"];
 			$queue = $_POST["queue"];
-
+			/*
 			$infocola = $this->colas->mcread($info);
+			$infocola = $this->colas->mcreadTest();
+			*/
+			$infocola = $this->colas->mcread($info);
+			
+			$resumencolas = $this->colas->mcread("resumencolas");
+			$queue_detaileds = $resumencolas["queue_detailed"];
+			$queue_detailed = null;
 
-			echo "<JSON_DATA>" . json_encode($infocola[$queue]) . "</JSON_DATA>";
+			if(array_key_exists(intval($queue), $queue_detaileds)){
+				$queue_detailed = $queue_detailed[intval($queue)];
+			}
+			
+
+			echo "<JSON_DATA>" . json_encode(
+				array(
+					"infocola" => $infocola[$queue],
+					"queue_detailed" => $queue_detailed
+				)
+			) . "</JSON_DATA>";
+			
 
 		}
 	}

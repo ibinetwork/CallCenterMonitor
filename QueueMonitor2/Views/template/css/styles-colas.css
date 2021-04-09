@@ -23,6 +23,16 @@ table
     order: 1;
 }
 
+
+.container-call-info > .container-left > .chart-container{
+    width: 50%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+
 .container-call-info > .container-right{
     display: flex;
     flex-direction: column;
@@ -54,3 +64,4 @@ table
     }
     
 }
+
