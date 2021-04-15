@@ -144,9 +144,11 @@ function getSpecificQueueState(queue_val){
             // filter to evade HTML rubish. This is a app custom protocol.
 
 
+            console.log(html)
             try {
 
                 full_response = extractJSONData(html)
+
 
                 infocola = full_response.infocola;
                 queue_detailed = full_response.queue_detailed;
@@ -172,7 +174,7 @@ function getSpecificQueueState(queue_val){
                         }
         
                         
-                        pieChart = plotPieChartAbandonadasCompletadas([queue_detailed.total_completadas, queue_detailed.total_abandonadas])
+                        pieChart = plotPieChartAbandonadasCompletadas([parseInt(queue_detailed.total_completadas), parseInt(queue_detailed.total_abandonadas)])
                         last_completadas = queue_detailed.total_completadas
                         last_abandonadas = queue_detailed.total_abandonadas
 
@@ -231,18 +233,54 @@ function getSpecificQueueState(queue_val){
 
 function plotPieChartAbandonadasCompletadas(data){
     // data = [num_abandonadas, num_completadas]
+    console.log("Data", data)
+
     var ctx = $('#chartPie')[0].getContext('2d');
+
+    ctx.height = 500;
     var labels = ["Completadas", "Abandonadas"]
     var colors = [
         'rgb(54, 162, 235)',
         'rgb(255, 99, 132)'
     ]
     var options = {
-        radius: "80%",
+        
+        tooltips: {
+            enabled: true
+        },
         animation:{
             animateScale: true
+        },
+        plugins: {
+            datalabels: {
+                formatter: (value, ctx) => {
+                
+                    let sum = 0;
+                    let dataArr = ctx.chart.data.datasets[0].data;
+                    dataArr.map(data => {
+                        sum += parseInt(data);
+                    });
+
+                    // console.log(value)
+                    if(value == 0){
+                        return ""
+                    }
+                    let percentage = (value*100 / sum).toFixed(2)+" %";
+                    return percentage;
+
+            
+                },
+                color: '#fff',
+            }
         }
+
+
     }
+
+
+    
+    
+
     return createChart(ctx, "pie", "Llamadas completadas vs abandonadas", labels, data, colors, options)
 
 }

@@ -21,7 +21,6 @@ class Cola{
 	}
 
 	public function mcreadTest(){
-		// this function is being read two times
 		return [];		
 
 	}

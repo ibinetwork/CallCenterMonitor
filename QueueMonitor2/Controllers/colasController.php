@@ -59,7 +59,6 @@ class colasController{
 			/*
 			$infocola = $this->colas->mcread($info);
 			$infocola = $this->colas->mcreadTest();
-			$global_summary = $this->colas->mcread($info)
 			*/
 			$infocola = $this->colas->mcread($info);
 			ksort($infocola);
@@ -94,8 +93,10 @@ class colasController{
 			$queue_detaileds = $resumencolas["queue_detailed"];
 			$queue_detailed = null;
 
-			if(array_key_exists(intval($queue), $queue_detaileds)){
-				$queue_detailed = $queue_detailed[intval($queue)];
+			// var_export($queue_detaileds);
+
+			if(array_key_exists($queue, $queue_detaileds)){
+				$queue_detailed = $queue_detaileds[$queue];
 			}
 			
 

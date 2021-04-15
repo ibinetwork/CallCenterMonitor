@@ -11,6 +11,8 @@
         "react/event-loop": "^1.0 || ^0.5",
         "react/promise": "^2.6.0 || ^1.2.1",
         "react/promise-timer": "^1.4.0",
-        "react/stream": "^1.1"
+        "react/stream": "^1.1",
+        "vakata/websocket": "^1.0",
+        "wrench/wrench": "^2.0"
     }
 }

@@ -25,11 +25,12 @@ table
 
 
 .container-call-info > .container-left > .chart-container{
-    width: 50%;
+    width: 35%;
     position: relative;
     display: flex;
     flex-direction: column;
     align-self: center;
+    margin-top: 2rem;
 }
 
 
@@ -49,6 +50,12 @@ table
 }
 
 
+@media screen and (max-width: 900px) {
+    .container-call-info > .container-left > .chart-container{
+        width: 50%;
+    }
+}
+
 @media screen and (max-width: 700px) {
 
     .container-call-info {
@@ -61,6 +68,10 @@ table
     
     .container-call-info > .container-right{
         order: 1;        
+    }
+
+    .container-call-info > .container-left > .chart-container{
+        width: 65%;
     }
     
 }

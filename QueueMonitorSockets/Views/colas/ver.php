@@ -62,7 +62,9 @@ var ref_id = "<?php echo $metadata; ?>";
 <script>
 console.log("VER-iniciando")
 var interval = setInterval(function(){console.log("Conectando a socket...")}, 3000)
-var websocket_server = new WebSocket("ws://localhost:15000/");
+
+var websocket_server = new WebSocket("wss://<?php echo BASE_URL; ?>/wss");
+
 websocket_server.onopen = function(e) {
     websocket_server.send(
         JSON.stringify({

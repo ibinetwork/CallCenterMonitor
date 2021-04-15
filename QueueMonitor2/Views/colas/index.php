@@ -56,7 +56,7 @@ $(function (ready){
       </div>
     </div>
     <div class="chart-container">
-      <h2 style="text-align: center;">Total de llamadas completadas vs abandonadas</h2>
+      <h4 style="text-align: center;">Total de llamadas completadas vs abandonadas</h4>
       <canvas id="chartPie"></canvas>
     </div>
 

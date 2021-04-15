@@ -61,14 +61,14 @@ var interval = setInterval(function (){
   console.log("Conecting to web socket server...")
 }, 2000);
 
-var websocket_server = new WebSocket("wss://<?php echo BASE_URL; ?>:<?php echo WEBSOCKET_PORT; ?>");
+//var websocket_server = new WebSocket("wss://<?php echo BASE_URL; ?>/wss");
+
+var websocket_server = new WebSocket("wss://<?php echo BASE_URL; ?>/wss");
 websocket_server.onopen = function(e) {
   
   clearInterval(interval);
   console.log("Connected, websocket open")
   
-    websocket_server.send("a");
-/*
 var request_update = JSON.stringify({
         'type':'update',
         'msg': "Open",
@@ -84,7 +84,7 @@ var request_update = JSON.stringify({
   interval = setInterval(function(){
     websocket_server.send(request_update);
   }, 1000);
-    */
+    
 
 };
 
@@ -97,7 +97,7 @@ websocket_server.onerror = function(e) {
 }
 websocket_server.onmessage = function(e)
 {
-  // console.log("ONMESSAGE", e)
+  console.log("ONMESSAGE", e)
   
   var json = JSON.parse(e.data);
 

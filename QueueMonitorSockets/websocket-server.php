@@ -23,24 +23,21 @@ $allow_self_signed = true;
 $IP = "127.0.0.1";
 $PORT = 9002;
 
-$local_cert = '/etc/apache2/certificate/apache-certificate.pem';
-$local_pk = '/etc/apache2/certificate/apache-key.pem';
+$local_cert = '/var/www/html/CallCenterMonitor/QueueMonitorSockets/combined.pem';
 $passphrase = '';
 $allow_self_signed = true;
 
 $string_conn = "tcp://$IP:$PORT";
 $loop = React\EventLoop\Factory::create();
 
-$server = new React\Socket\TcpServer(9002, $loop);
-$socket = new React\Socket\SecureServer($server, $loop, array(
-    'tls' => array(
-        'verify_peer' => false,
-        'allow_self_signed' => $allow_self_signed,
-        'passphrase' => $passphrase,
-        'local_cert' => $local_cert,
-        'local_pk' => $local_pk
-        , 'ciphers' => 'TLS_AES_128_GCM_SHA256'  // TLS_AES_128_GCM_SHA256,
- )
+$socket = new React\Socket\Server($string_conn, $loop, array(
+   'tls' => array(
+       'verify_peer' => false,
+       'allow_self_signed' => $allow_self_signed,
+       'passphrase' => $passphrase,
+       'local_cert' => $local_cert
+       , 'ciphers' => 'TLS_AES_128_GCM_SHA256'  // TLS_AES_128_GCM_SHA256,
+)
 ));
 
 $connections = array();
@@ -83,9 +80,6 @@ $socket->on('connection', function (React\Socket\ConnectionInterface $connection
         }
         else{
           
-            echo "LENGTH: " . strlen($data) . "\n$data";
-            
-            /*
             $raw_message = decodeInputMessage($data);
             // echo "Raw: " . $raw_message;
 
@@ -118,7 +112,7 @@ $socket->on('connection', function (React\Socket\ConnectionInterface $connection
             }
 
             
-*/
+
             
         }
         

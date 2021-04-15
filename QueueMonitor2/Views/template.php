@@ -24,7 +24,8 @@ class Template{
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <script src="<?php echo URL; ?>Views/template/js/third_libs/jquery.min.js"></script>
         <script src="<?php echo URL; ?>Views/template/js/third_libs/bootstrap.min.js"></script>
-        <script src="<?php echo URL; ?>Views/template/js/third_libs/chartjs.js"></script>
+        <script src="<?php echo URL; ?>Views/template/js/third_libs/chartjs2-9-4.js"></script>
+        <script src="<?php echo URL; ?>Views/template/js/third_libs/chart-datalabels.js"></script>
         <script>
         const ref_url = "<?php echo URL; ?>";
         </script>
